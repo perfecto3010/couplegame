@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Our Game</title>
+    <style>
+        :root {
+            --bg-color: #f0f2f5;
+            --wife-color: #ff85a2;
+            --husband-color: #4a90e2;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.5s ease;
+            background-color: var(--bg-color);
+            text-align: center;
+            padding: 20px;
+        }
+        #card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            width: 80%;
+            max-width: 400px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        button {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 50px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        #turn-indicator {
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="turn-indicator">Tap to Start</div>
+    <div id="card">Ready?</div>
+    <button onclick="nextTurn()">Next Turn</button>
+
+    <script>
+        const records = [
+            "Tell a secret you've never told me.",
+            "What is your favorite memory of us?",
+            "Give your partner a 30-second massage.",
+            "What is one thing you appreciate about me today?",
+            // ... Add your 50 records here
+        ];
+
+        let isWifeTurn = Math.random() < 0.5; // Randomize who starts
+        const card = document.getElementById('card');
+        const indicator = document.getElementById('turn-indicator');
+        const body = document.body;
+
+        function nextTurn() {
+            // Pick a random record
+            const randomIndex = Math.floor(Math.random() * records.length);
+            card.innerText = records[randomIndex];
+
+            // Toggle Turn
+            isWifeTurn = !isWifeTurn;
+
+            // Update UI
+            if (isWifeTurn) {
+                indicator.innerText = "Wife's Turn";
+                body.style.backgroundColor = "var(--wife-color)";
+            } else {
+                indicator.innerText = "Husband's Turn";
+                body.style.backgroundColor = "var(--husband-color)";
+            }
+            
+            // Subtle haptic feedback (works on many mobile devices)
+            if (window.navigator.vibrate) window.navigator.vibrate(50);
+        }
+    </script>
+</body>
+</html>
