@@ -2,7 +2,7 @@ const cacheName = 'Gahez-v2.3';
 const assets = [
   './',
   './index.html',
-  './gamesData.js',
+  './gamedata.js',
   './manifest.json',
   'https://cdn-icons-png.flaticon.com/512/833/833472.png'
 ];
